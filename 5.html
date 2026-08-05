@@ -648,7 +648,12 @@ function setQrImage(){
     setTimeout(()=>{
       const canvas=work.querySelector('canvas'), image=work.querySelector('img');
       const dataUrl=canvas?canvas.toDataURL('image/png'):(image?image.src:'');
-      if(dataUrl) showQrDataUrl(dataUrl); else if(initialQrImage.trim()) showQrDataUrl(initialQrImage); else setEventImage();
+      // 再読み込み時に入場済み状態が復元されている場合は、QRコードで上書きせずイベント画像を維持する
+      const isEntered = document.getElementById('stamp')?.classList.contains('show');
+      if(isEntered) setEventImage();
+      else if(dataUrl) showQrDataUrl(dataUrl);
+      else if(initialQrImage.trim()) showQrDataUrl(initialQrImage);
+      else setEventImage();
       work.remove();
     },0);
   }else if(initialQrImage.trim()){ showQrDataUrl(initialQrImage); }
