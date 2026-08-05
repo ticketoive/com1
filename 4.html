@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ダイブチケット作成</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,Arial,sans-serif;color:#222}.wrap{width:calc(100% - 32px);max-width:420px;margin:18px auto 40px;background:#fff;border-radius:16px;padding:18px;box-shadow:0 8px 26px rgba(0,0,0,.12)}h1{font-size:22px;margin:0 0 6px;text-align:center}.lead{font-size:12px;line-height:1.6;color:#666;margin:0 0 18px;text-align:center}label{display:block;font-size:13px;font-weight:700;color:#444;margin:14px 0 6px}input,textarea,select{width:100%;border:1px solid #d6d6d6;border-radius:10px;padding:11px 12px;font-size:16px;font-family:inherit;background:#fff}textarea{min-height:72px;resize:vertical}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.check-help,.color-help{font-size:11px;color:#777;line-height:1.5;margin:8px 0 0}.scroll-options{margin:12px 0 4px;padding:12px;border:1px solid #e5e7eb;border-radius:12px;background:#f9fafb;display:flex;flex-direction:column;gap:10px}.check-row{display:flex;align-items:center;gap:9px;margin:0;font-size:13px;font-weight:700;color:#444}.check-row input{width:18px;height:18px;margin:0;accent-color:#489afb}.color-select-wrap{display:flex;align-items:center;gap:10px}.color-preview{width:38px;height:38px;border-radius:9px;border:1px solid #d6d6d6;flex:0 0 38px}.preview{display:none;margin-top:8px;border-radius:12px;overflow:hidden;background:#f4f4f4;text-align:center}.preview.show{display:block}.preview img{display:block;width:100%;max-height:180px;object-fit:contain}button{width:100%;margin-top:18px;border:0;border-radius:999px;padding:15px;font-size:17px;font-weight:800;color:#fff;background:linear-gradient(90deg,#7bc3e2,#489afb);box-shadow:0 6px 16px rgba(72,154,251,.28)}button:active{opacity:.78}input[type=hidden]{display:none}
+</style>
+</head>
+<body><main class="wrap">
+<h1>ダイブチケット作成</h1><p class="lead">イベント画像URLとQRコードの読み取り結果を入力して、5.htmlに表示します。</p>
+<label for="image">イベント画像URL</label><input id="image" type="url" value="https://storage.googleapis.com/playyte-ticket-prod_event/oSKEcfB0O9Zh8m0VSwuV_895248_1782217279208.webp" placeholder="https://example.com/event.webp"><div id="eventPreview" class="preview"><img id="eventPreviewImg" alt="イベント画像プレビュー"></div><p class="check-help">※画像ファイルではなく、画像を直接表示できるURLを入力してください。</p>
+<label for="qrText">QRコードの読み取り結果</label><textarea id="qrText" spellcheck="false" placeholder="QRコードを読み取った文字列をそのまま入力">gTLjtvZp7dZfa16GN7lnvrkj79XEDrWYM6C/JAjFL0bYtWv2dY9G4KQrqes=</textarea><p class="check-help">※URLでなくても大丈夫です。入力文字列を5.html側でQRコードに再生成します。</p>
+<label>公演名</label><input id="title" value="SPARK 2026 渋谷納涼祭"><label>会場名</label><textarea id="venue">ベルサール渋谷ガーデン / Spotify O-nest / SHIBUYA DESEO / SHIBUYA THE GAME / チェルシーホテル / 渋谷Star Lounge / Studio Freedom / LIVE STAGE GUILTY / SHIBUYA FOWS</textarea>
+<div class="grid"><div><label>日付</label><input id="date" value="7.11"></div><div><label>曜日</label><input id="weekday" value="土"></div></div>
+<div class="grid"><div><label>OPEN</label><input id="openTime" value="9:00"></div><div><label>START</label><input id="startTime" value="9:30"></div></div>
+<label>表示名</label><input id="name" value="デモ太郎"><label>お気に入り/推し表示</label><input id="favorite" value="ハニースパイスRe."><label>券名</label><input id="ticketName" value="【DAY1】VIPチケット先行抽選">
+<label>横スクロール設定</label><div class="scroll-options"><label class="check-row"><input type="checkbox" id="scrollTitle">公演名を横に流す</label><label class="check-row"><input type="checkbox" id="scrollVenue">会場名を横に流す</label><label class="check-row"><input type="checkbox" id="scrollTicket">券名を横に流す</label><p class="check-help">※チェックを付けた項目だけ横に流れます。</p></div>
+<label>整理番号表示</label><input id="ticketType" value="S10"><label>分配設定</label><select id="shareEnabled"><option value="false">分配不可</option><option value="true" selected>分配可能</option></select>
+<label>詳細リンクURL</label><input id="detailUrl" placeholder="https://example.com/">
+<div class="grid"><div><label>画面背景色</label><div class="color-select-wrap"><select id="bodyColorSelect" onchange="setColor('bodyColor', 'bodyColorPreview', this.value)"><option value="#F9D1B7" selected>オレンジ</option><option value="#C0E1F4">水色</option><option value="#B5E4CF">緑色</option><option value="#F2E2BC">黄色</option><option value="#D4AFD6">紫</option></select><span id="bodyColorPreview" class="color-preview" style="background:#F9D1B7"></span></div><input id="bodyColor" type="hidden" value="#F9D1B7"></div><div><label>番号背景色</label><div class="color-select-wrap"><select id="ticketColorSelect" onchange="setColor('ticketColor', 'ticketColorPreview', this.value)"><option value="#EC660F" selected>オレンジ</option><option value="#2D9CDB">青色</option><option value="#08A460">緑色</option><option value="#D29E1F">黄色</option><option value="#BB2FC7">紫</option></select><span id="ticketColorPreview" class="color-preview" style="background:#EC660F"></span></div><input id="ticketColor" type="hidden" value="#EC660F"></div></div>
+<button type="button" onclick="openPreview()">チケットを表示する</button>
+</main><script>
+function setColor(inputId,previewId,color){document.getElementById(inputId).value=color;document.getElementById(previewId).style.background=color}
+const imageInput=document.getElementById('image'),eventPreview=document.getElementById('eventPreview'),eventPreviewImg=document.getElementById('eventPreviewImg');
+function updateEventPreview(){const url=imageInput.value.trim();if(!url){eventPreview.classList.remove('show');eventPreviewImg.removeAttribute('src');return}eventPreviewImg.src=url;eventPreview.classList.add('show')}
+imageInput.addEventListener('change',updateEventPreview);eventPreviewImg.addEventListener('error',()=>eventPreview.classList.remove('show'));updateEventPreview();
+function normalizeParamValue(value){let normalized=value==null?'':String(value);for(let i=0;i<2;i++){try{const decoded=decodeURIComponent(normalized);if(decoded===normalized)break;normalized=decoded}catch(e){break}}return normalized}
+function openPreview(){
+ const requiredQr=document.getElementById('qrText').value.trim();if(!requiredQr){alert('QRコードの読み取り結果を入力してください。');document.getElementById('qrText').focus();return}
+ const ids=['image','qrText','title','venue','date','weekday','openTime','startTime','name','favorite','ticketName','ticketType','shareEnabled','detailUrl','bodyColor','ticketColor'];const params=new URLSearchParams();ids.forEach(id=>params.set(id,normalizeParamValue(document.getElementById(id).value)));
+ params.set('scrollTitle',document.getElementById('scrollTitle').checked?'true':'false');params.set('scrollVenue',document.getElementById('scrollVenue').checked?'true':'false');params.set('scrollTicket',document.getElementById('scrollTicket').checked?'true':'false');location.href='5.html?'+params.toString();
+}
+</script></body></html>
