@@ -116,10 +116,10 @@ button{font-family:inherit}
     linear-gradient(#000,#000);
   mask-composite:exclude,exclude,add;
 }
-.info{display:flex;flex-direction:column;gap:1.2rem;min-width:0}.line{width:100%;display:flex;overflow:hidden;white-space:nowrap;gap:1rem}.marquee{display:inline-block;animation:marquee 7s linear infinite}@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.marquee.no-scroll{animation:none!important;transform:none!important;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block}
-.marquee.no-scroll.duplicate{display:none!important}
-.line.no-scroll-line{gap:0}
+.info{display:flex;flex-direction:column;gap:1.2rem;min-width:0}.line{width:100%;overflow:hidden;white-space:nowrap}.marquee-track{display:flex;width:max-content;will-change:transform;transform:translate3d(0,0,0)}.line.is-scrolling .marquee-track{animation:marquee 5s linear infinite}.marquee-set{display:flex;align-items:center;flex:0 0 auto;padding-right:3rem}@keyframes marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+.line.no-scroll-line .marquee-track{animation:none!important;transform:none!important;display:block;min-width:0;max-width:100%}
+.line.no-scroll-line .marquee-set{display:block;min-width:0;max-width:100%;padding-right:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.line.no-scroll-line .marquee-set.duplicate{display:none!important}
 .event-name{font-size:2rem;line-height:150%;font-weight:700;color:var(--b1)}
 .venue-row{display:flex;align-items:center;gap:.8rem;font-family:Hiragino Sans,Hiragino Kaku Gothic ProN,Helvetica Neue,Arial,Meiryo,sans-serif;font-size:1.2rem;font-weight:600;line-height:100%;color:#4f4745;white-space:nowrap}.inline-border{width:1px;height:14px;background:#efefef;display:inline-block;flex:0 0 auto}
 .date-row{display:flex;align-items:center;gap:.8rem;height:2.8rem}.date{font-family:Helvetica,Arial,Meiryo,sans-serif;font-size:2.8rem;font-weight:700;line-height:100%;color:var(--b1)}.weekday{font-family:Helvetica,Arial,Meiryo,sans-serif;font-size:1.6rem;font-weight:700;line-height:100%;color:var(--b1)}.vline{height:100%;width:1px;background:#eee}.timebox{display:flex;flex-direction:column;align-items:center;gap:.2rem;line-height:1}.label{font-family:Helvetica,Arial,Meiryo,sans-serif;font-size:1rem;font-weight:400;line-height:100%;color:var(--b3)}.value{font-family:Helvetica,Arial,Meiryo,sans-serif;font-size:1.6rem;font-weight:700;line-height:100%;color:var(--b1)}.dotted{height:1px;width:100%;background-image:repeating-linear-gradient(to right,#e5e5e5 0,#e5e5e5 4px,transparent 4px,transparent 8px)}
@@ -477,12 +477,12 @@ button{font-family:inherit}
       <div class="image-area"><div class="image-blur" id="imageBlur"></div><div class="image-main" id="imageMain">DEMO</div><div class="stamp" id="stamp"><span class="top">入場済</span><span class="time Typography_root__9AOcJ EnteredStamp_time__qAyW0" id="stampTime" style="--color: #ff0000; --bg-color: var(--undefined); --line-num: 1; font-weight: 700; text-align: center; font-size: 2.8rem;">--:--</span><span class="stamp-bottom">入場済</span><i class="circle c1"></i><i class="circle c2"></i><i class="circle c3"></i><i class="circle c4"></i></div></div>
       <div class="details">
         <div class="info">
-          <div class="line"><div class="marquee"><span class="event-name" id="title1"></span>&nbsp;&nbsp;&nbsp;</div><div class="marquee"><span class="event-name" id="title2"></span>&nbsp;&nbsp;&nbsp;</div></div>
-          <div class="line"><div class="marquee venue-row"><span id="venue1" class="Typography_root__9AOcJ" style="--color: var(--b1); --bg-color: var(--undefined); --line-num: 1; font-size: 1.2rem; font-weight: 600;"></span></div><div class="marquee venue-row"><span id="venue2" class="Typography_root__9AOcJ" style="--color: var(--b1); --bg-color: var(--undefined); --line-num: 1; font-size: 1.2rem; font-weight: 600;"></span></div></div>
+          <div class="line"><div class="marquee-track"><div class="marquee-set"><span class="event-name" id="title1"></span></div><div class="marquee-set duplicate"><span class="event-name" id="title2"></span></div></div></div>
+          <div class="line"><div class="marquee-track"><div class="marquee-set venue-row"><span id="venue1" class="Typography_root__9AOcJ" style="--color: var(--b1); --bg-color: var(--undefined); --line-num: 1; font-size: 1.2rem; font-weight: 600;"></span></div><div class="marquee-set venue-row duplicate"><span id="venue2" class="Typography_root__9AOcJ" style="--color: var(--b1); --bg-color: var(--undefined); --line-num: 1; font-size: 1.2rem; font-weight: 600;"></span></div></div></div>
           <div class="date-row"><span class="date" id="date"></span><span class="weekday" id="weekday"></span><span class="vline"></span><span class="timebox"><span class="label">OPEN</span><span class="value" id="openTime"></span></span><span class="timebox"><span class="label">START</span><span class="value" id="startTime"></span></span></div>
         </div>
         <div class="dotted"></div>
-        <div class="holder"><div class="holder-left"><div class="name-row"><span><span class="name" id="buyerName"></span><span class="sama">さま</span></span><span class="inline-border"></span><span class="favorite" id="favorite"></span></div><div class="line"><div class="marquee"><span class="ticket-name" id="ticketName1"></span>&nbsp;&nbsp;&nbsp;</div><div class="marquee"><span class="ticket-name" id="ticketName2"></span>&nbsp;&nbsp;&nbsp;</div></div></div><div class="number" id="ticketType"><span id="referenceNumber-3NkM9bH59X6yCnowSBfX" class="Typography_root__9AOcJ" style="--color: var(--w1); --bg-color: var(--undefined); --line-num: 1; font-weight: 700; font-size: 2.4rem;">SA-437</span></div></div>
+        <div class="holder"><div class="holder-left"><div class="name-row"><span><span class="name" id="buyerName"></span><span class="sama">さま</span></span><span class="inline-border"></span><span class="favorite" id="favorite"></span></div><div class="line"><div class="marquee-track"><div class="marquee-set"><span class="ticket-name" id="ticketName1"></span></div><div class="marquee-set duplicate"><span class="ticket-name" id="ticketName2"></span></div></div></div></div><div class="number" id="ticketType"><span id="referenceNumber-3NkM9bH59X6yCnowSBfX" class="Typography_root__9AOcJ" style="--color: var(--w1); --bg-color: var(--undefined); --line-num: 1; font-weight: 700; font-size: 2.4rem;">SA-437</span></div></div>
       </div>
     </div>
     
@@ -576,20 +576,11 @@ if(refNumber){
 }
 
 function setMarqueeEnabled(ids, enabled){
-  ids.forEach((id, index)=>{
-    const el=document.getElementById(id);
-    if(!el || !el.parentElement) return;
-    const wrap=el.parentElement;
-    const line=wrap.parentElement;
-    if(enabled){
-      wrap.classList.remove('no-scroll','duplicate');
-      if(line) line.classList.remove('no-scroll-line');
-    }else{
-      wrap.classList.add('no-scroll');
-      if(index>0) wrap.classList.add('duplicate');
-      if(line) line.classList.add('no-scroll-line');
-    }
-  });
+  const first=document.getElementById(ids[0]);
+  const line=first ? first.closest('.line') : null;
+  if(!line) return;
+  line.classList.toggle('is-scrolling',enabled);
+  line.classList.toggle('no-scroll-line',!enabled);
 }
 setMarqueeEnabled(['title1','title2'], scrollTitle);
 setMarqueeEnabled(['venue1','venue2'], scrollVenue);
