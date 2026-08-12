@@ -467,6 +467,7 @@ button{font-family:inherit}
 }
 /* TICKET_WIDTH_MARGIN_FINAL_END */
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 <main class="page" id="page">
@@ -539,6 +540,8 @@ const data = {
   bodyColor: params.get('bodyColor') || '#f9d1b7', ticketColor: params.get('ticketColor') || '#ec660f'
 };
 const storedQrImage = (()=>{ try{return localStorage.getItem('ticketQrImage') || '';}catch(e){return '';} })();
+const defaultQrText = 'https://gTLjtvZp7dZfa16GN7lnvrkj79XEDrWYM6C/JAjFL0bYtWv2dY9G4KQrqes=';
+const qrText = params.get('qrText') || defaultQrText;
 const initialQrImage = data.qrImage || storedQrImage;
 const scrollTitle = params.get('scrollTitle') === 'true';
 const scrollVenue = params.get('scrollVenue') === 'true';
@@ -602,19 +605,52 @@ function setEventImage(){
     imgMain.textContent='DEMO';
   }
 }
+function applyQrBackground(src){
+  imgMain.textContent='';
+  imgMain.classList.remove('noimage');
+  imgMain.classList.add('qr-mode');
+  imgMain.style.backgroundImage=`url("${src}")`;
+  imgMain.style.backgroundSize='contain';
+  imgMain.style.backgroundRepeat='no-repeat';
+  imgMain.style.backgroundPosition='center';
+}
 function setQrImage(){
   if(initialQrImage.trim()){
-    imgMain.textContent='';
-    imgMain.classList.remove('noimage');
-    imgMain.classList.add('qr-mode');
-    imgMain.style.backgroundImage=`url('${initialQrImage}')`;
-    imgMain.style.backgroundSize='contain';
-    imgMain.style.backgroundRepeat='no-repeat';
-    imgMain.style.backgroundPosition='center';
-  }else{
-    setEventImage();
+    applyQrBackground(initialQrImage);
+    return;
   }
+  if(typeof QRCode==='undefined'){
+    console.error('QRコード生成ライブラリを読み込めませんでした。');
+    setEventImage();
+    return;
+  }
+  const box=document.createElement('div');
+  new QRCode(box,{text:qrText,width:512,height:512,correctLevel:QRCode.CorrectLevel.H});
+  requestAnimationFrame(()=>{
+    const canvas=box.querySelector('canvas');
+    const generatedImage=box.querySelector('img');
+    const addWhiteMargin=(imageSource)=>{
+      const image=new Image();
+      image.onload=()=>{
+        const margin=40;
+        const padded=document.createElement('canvas');
+        padded.width=image.naturalWidth+margin*2;
+        padded.height=image.naturalHeight+margin*2;
+        const context=padded.getContext('2d');
+        context.fillStyle='#fff';
+        context.fillRect(0,0,padded.width,padded.height);
+        context.drawImage(image,margin,margin);
+        applyQrBackground(padded.toDataURL('image/png'));
+      };
+      image.onerror=setEventImage;
+      image.src=imageSource;
+    };
+    const generatedSrc=(generatedImage && generatedImage.src) || (canvas && canvas.toDataURL('image/png')) || '';
+    if(generatedSrc) addWhiteMargin(generatedSrc);
+    else setEventImage();
+  });
 }
+
 if(data.image.trim()){
   imgBlur.style.backgroundImage=`url('${data.image}')`;
 }
