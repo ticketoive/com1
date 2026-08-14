@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name Test
-// @match https://ticket.tv-asahi.co.jp/tp/ticket/access/QbP9lLvsShdV5GvwaN3hmFugbcQ9F1HbdVEIXDtbsXb7bjQFXe3f8sbXeETYSbnS/*
+// @match https://ticket.tv-asahi.co.jp/tp/ticket/access/QbP9lLvsShdV5GvwaN3hmFugbcQ9F1HbdVEIXDtbsXb7bjQFXe3f8sbXeETYSbnS
 // ==/UserScript==
 
 (function () {
