@@ -551,6 +551,7 @@ const initialQrImage = data.qrImage || storedQrImage;
 const scrollTitle = params.get('scrollTitle') === 'true';
 const scrollVenue = params.get('scrollVenue') === 'true';
 const scrollTicket = params.get('scrollTicket') === 'true';
+const bgDirection = params.get('bgDirection') || 'reverse';
 document.documentElement.style.setProperty('--bg', data.bodyColor);
 document.documentElement.style.setProperty('--accent', data.ticketColor);
 function setText(id, value){
@@ -593,6 +594,7 @@ function setMarqueeEnabled(ids, enabled){
 setMarqueeEnabled(['title1','title2'], scrollTitle);
 setMarqueeEnabled(['venue1','venue2'], scrollVenue);
 setMarqueeEnabled(['ticketName1','ticketName2'], scrollTicket);
+const bgWords=document.querySelector('.bg-words');if(bgWords){if(bgDirection==='reverse'){bgWords.style.transform='rotate(30deg)';bgWords.style.transformOrigin='60rem 20rem';}else{bgWords.style.transform='rotate(-30deg)';bgWords.style.transformOrigin='25rem 70rem';}}
 
 const imgMain=document.getElementById('imageMain'), imgBlur=document.getElementById('imageBlur');
 function setEventImage(){
