@@ -706,27 +706,6 @@ if(detailBtn){
 }
 
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.__toastTimer);window.__toastTimer=setTimeout(()=>t.classList.remove('show'),1600)}
-function applyMarquee(id){
-  const el = document.getElementById(id);
-  if(!el) return;
-
-  const line = el.closest('.line');
-  if(!line) return;
-
-  if(line.classList.contains('is-scrolling')){
-    const text = el.textContent;
-
-    line.innerHTML = `
-      <div class="marquee-track">
-        <div class="marquee-set">${text}</div>
-      </div>
-    `;
-  }
-}
-
-applyMarquee('venue1');
-applyMarquee('venue2');
-
 </script>
 </body>
 </html>
