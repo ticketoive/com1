@@ -116,16 +116,12 @@ button{font-family:inherit}
     linear-gradient(#000,#000);
   mask-composite:exclude,exclude,add;
 }
-.info { display: flex; flex-direction: column; gap: 1.2rem; min-width: 0; }
-.line { width: 100%; overflow: hidden; white-space: nowrap; font-size: inherit; line-height: inherit; }
-.marquee-track { display: flex; width: max-content; will-change: transform; transform: translate3d(0,0,0); animation: marquee 10s linear infinite; font-size: inherit; line-height: inherit; }
-.marquee-set { display: flex; align-items: center; flex: 0 0 auto; padding-right: 3rem; font-size: inherit; }
-
-/* 流れる文字のサイズ制限を解除し、親要素と同じサイズを保持 */
-.line.is-scrolling #venue1,
-.line.is-scrolling #venue2 {
-  font-size: inherit !important;
-}
+.info{display:flex;flex-direction:column;gap:1.2rem;min-width:0}
+.line{width:100%;overflow:hidden;white-space:nowrap;font-size:1.2rem !important;line-height:inherit;}
+.marquee-track{display:flex;width:max-content;will-change:transform;transform:translate3d(0,0,0);animation:marquee 10s linear infinite;}
+.marquee-set{display:flex;align-items:center;flex:0 0 auto;padding-right:3rem;font-size:inherit;}
+@keyframes marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+  
 .event-name{font-size:2rem;line-height:150%;font-weight:700;color:var(--b1)}
 .venue-row{display:flex;align-items:center;gap:.8rem;font-family:Hiragino Sans,Hiragino Kaku Gothic ProN,Helvetica Neue,Arial,Meiryo,sans-serif;font-size:1.2rem;font-weight:600;line-height:100%;color:#4f4745;white-space:nowrap}.inline-border{width:1px;height:14px;background:#efefef;display:inline-block;flex:0 0 auto}
 .date-row{display:flex;align-items:center;gap:.8rem;height:2.8rem}.date{font-family:Helvetica,Arial,Meiryo,sans-serif;font-size:2.8rem;font-weight:700;line-height:100%;color:var(--b1)}.weekday{font-family:Helvetica,Arial,Meiryo,sans-serif;font-size:1.6rem;font-weight:700;line-height:100%;color:var(--b1)}.vline{height:100%;width:1px;background:#eee}.timebox{display:flex;flex-direction:column;align-items:center;gap:.2rem;line-height:1}.label{font-family:Helvetica,Arial,Meiryo,sans-serif;font-size:1rem;font-weight:400;line-height:100%;color:var(--b3)}.value{font-family:Helvetica,Arial,Meiryo,sans-serif;font-size:1.6rem;font-weight:700;line-height:100%;color:var(--b1)}.dotted{height:1px;width:100%;background-image:repeating-linear-gradient(to right,#e5e5e5 0,#e5e5e5 4px,transparent 4px,transparent 8px)}
