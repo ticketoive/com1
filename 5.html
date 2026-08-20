@@ -123,15 +123,16 @@ button{font-family:inherit}
 .info{display:flex;flex-direction:column;gap:1.2rem;min-width:0}
 .line{width:100%;overflow:hidden;white-space:nowrap;}
 
-/* アニメーションと文字サイズの修正（ここを最適化） */
+.event-name{font-size:2rem;line-height:150%;font-weight:700;color:var(--b1)}
+.venue-row{display:flex;align-items:center;gap:.8rem;font-family:Hiragino Sans,Hiragino Kaku Gothic ProN,Helvetica Neue,Arial,Meiryo,sans-serif;font-size:1.2rem;font-weight:600;line-height:100%;color:#4f4745;white-space:nowrap}
+
+/* 会場名エリア（#venue1, #venue2）のみ1.2remを確実に保持 */
+#venue1, #venue2 { font-size:1.2rem !important; font-weight:600 !important; }
+
+/* 元の速度（10s）とデザインを保持した marquee 設定 */
 .marquee-track{display:flex;width:max-content;will-change:transform;transform:translate3d(0,0,0);animation:marquee 10s linear infinite;}
 .marquee-set{display:flex;align-items:center;flex:0 0 auto;padding-right:3rem;}
 @keyframes marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
-
-.event-name{font-size:2rem;line-height:150%;font-weight:700;color:var(--b1)}
-.venue-row{display:flex;align-items:center;gap:.8rem;font-family:Hiragino Sans,Hiragino Kaku Gothic ProN,Helvetica Neue,Arial,Meiryo,sans-serif;font-size:1.2rem;font-weight:600;line-height:100%;color:#4f4745;white-space:nowrap}
-/* 会場名エリア（#venue1, #venue2）のフォントサイズを流れない時と同じ1.2remに完全固定 */
-#venue1, #venue2 { font-size: 1.2rem !important; font-weight: 600; }
 
 .inline-border{width:1px;height:14px;background:#efefef;display:inline-block;flex:0 0 auto;margin:0 !important;}
 .date-row{display:flex;align-items:center;gap:.8rem;height:2.8rem}.date{font-family:Helvetica,Arial,Meiryo,sans-serif;font-size:2.8rem;font-weight:700;line-height:100%;color:var(--b1)}.weekday{font-family:Helvetica,Arial,Meiryo,sans-serif;font-size:1.6rem;font-weight:700;line-height:100%;color:var(--b1)}.vline{height:100%;width:1px;background:#eee}.timebox{display:flex;flex-direction:column;align-items:center;gap:.2rem;line-height:1}.label{font-family:Helvetica,Arial,Meiryo,sans-serif;font-size:1rem;font-weight:400;line-height:100%;color:var(--b3)}.value{font-family:Helvetica,Arial,Meiryo,sans-serif;font-size:1.6rem;font-weight:700;line-height:100%;color:var(--b1)}.dotted{height:1px;width:100%;background-image:repeating-linear-gradient(to right,#e5e5e5 0,#e5e5e5 4px,transparent 4px,transparent 8px)}
