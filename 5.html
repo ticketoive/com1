@@ -116,11 +116,37 @@ button{font-family:inherit}
     linear-gradient(#000,#000);
   mask-composite:exclude,exclude,add;
 }
-.info{display:flex;flex-direction:column;gap:1.2rem;min-width:0}
-.line{width:100%;overflow:hidden;white-space:nowrap;font-size:1.2rem !important;line-height:inherit;}
-.marquee-track{display:flex;width:max-content;will-change:transform;transform:translate3d(0,0,0);animation:marquee 10s linear infinite;}
-.marquee-set{display:flex;align-items:center;flex:0 0 auto;padding-right:3rem;font-size:inherit;}
-@keyframes marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+.info { display: flex; flex-direction: column; gap: 1.2rem; min-width: 0; }
+.line { width: 100%; overflow: hidden; white-space: nowrap; line-height: inherit; }
+
+/* 元の速度（10s）でアニメーションを再有効化 */
+.marquee-track {
+  display: flex !important;
+  width: max-content !important;
+  will-change: transform;
+  transform: translate3d(0,0,0);
+  animation: marquee 10s linear infinite !important;
+}
+
+.marquee-set {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  padding-right: 3rem;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* 流れる文字（span）のサイズを親要素の大きさに合わせる */
+.marquee-set span {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
   
 .event-name{font-size:2rem;line-height:150%;font-weight:700;color:var(--b1)}
 .venue-row{display:flex;align-items:center;gap:.8rem;font-family:Hiragino Sans,Hiragino Kaku Gothic ProN,Helvetica Neue,Arial,Meiryo,sans-serif;font-size:1.2rem;font-weight:600;line-height:100%;color:#4f4745;white-space:nowrap}.inline-border{width:1px;height:14px;background:#efefef;display:inline-block;flex:0 0 auto}
