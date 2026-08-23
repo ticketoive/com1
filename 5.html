@@ -472,6 +472,15 @@ button{font-family:inherit}
 body{background:#5CA6E3 !important;}
 .page{background:var(--bg) !important;}
 /* OUTSIDE_BACKGROUND_ONLY_END */
+
+/* MARQUEE_SIZE_UNIFY_FIX */
+html,body{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important;}
+.line,.line .marquee-track,.line .marquee-set{font-size:inherit!important;line-height:inherit!important;}
+.line .event-name{font-size:2rem!important;line-height:150%!important;}
+.line .venue-row,.line .venue-row span{font-size:1.2rem!important;line-height:100%!important;}
+.line .ticket-name{font-size:1.6rem!important;line-height:normal!important;}
+@media(max-width:390px){.line .event-name{font-size:1.85rem!important;}}
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
