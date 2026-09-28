@@ -469,7 +469,7 @@ button{font-family:inherit}
 /* TICKET_WIDTH_MARGIN_FINAL_END */
 
 /* OUTSIDE_BACKGROUND_ONLY_START */
-body{background:#5CA6E3 !important;}
+body{background:#FFFFFF !important;}
 .page{background:var(--bg) !important;}
 /* OUTSIDE_BACKGROUND_ONLY_END */
 
@@ -480,6 +480,53 @@ html,body{-webkit-text-size-adjust:100%!important;text-size-adjust:100%!importan
 .line .venue-row,.line .venue-row span{font-size:1.2rem!important;line-height:100%!important;}
 .line .ticket-name{font-size:1.6rem!important;line-height:normal!important;}
 @media(max-width:390px){.line .event-name{font-size:1.85rem!important;}}
+
+
+/* BACKGROUND_DIRECTION_SUPPORT_START */
+.bg-words.vertical-down{
+  top:8.2rem !important;
+  left:0 !important;
+  width:100% !important;
+  height:calc(100% - 8.2rem) !important;
+  transform:none !important;
+  transform-origin:center !important;
+  display:grid !important;
+  grid-template-columns:repeat(3,1fr) !important;
+  justify-items:center !important;
+  align-items:stretch !important;
+  overflow:hidden !important;
+}
+.bg-words.vertical-down .bg-row{
+  display:flex !important;
+  width:auto !important;
+  height:120% !important;
+  transform:none !important;
+  overflow:hidden !important;
+  justify-content:flex-start !important;
+  align-items:center !important;
+}
+.bg-words.vertical-down .bg-row:nth-child(n+4){display:none !important;}
+.bg-words.vertical-down .bg-track{
+  display:block !important;
+  width:auto !important;
+  min-width:0 !important;
+  white-space:nowrap !important;
+  writing-mode:vertical-rl !important;
+  text-orientation:mixed !important;
+  color:var(--w3) !important;
+  font-size:6.4rem !important;
+  line-height:1 !important;
+  letter-spacing:.2rem !important;
+  opacity:.28 !important;
+  animation:bgMoveVerticalDown 20s linear 1s infinite both !important;
+}
+.bg-words.vertical-down .bg-track:nth-child(2){display:none !important;}
+.bg-words.vertical-down .bg-track span{display:none !important;}
+@keyframes bgMoveVerticalDown{
+  0%{transform:translateY(-105%) rotate(180deg)}
+  100%{transform:translateY(105%) rotate(180deg)}
+}
+/* BACKGROUND_DIRECTION_SUPPORT_END */
 
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -604,7 +651,25 @@ function setMarqueeEnabled(ids, enabled){
 setMarqueeEnabled(['title1','title2'], scrollTitle);
 setMarqueeEnabled(['venue1','venue2'], scrollVenue);
 setMarqueeEnabled(['ticketName1','ticketName2'], scrollTicket);
-const bgWords=document.querySelector('.bg-words');if(bgWords){if(bgDirection==='reverse'){bgWords.style.transform='rotate(30deg)';bgWords.style.transformOrigin='60rem 20rem';}else{bgWords.style.transform='rotate(-30deg)';bgWords.style.transformOrigin='25rem 70rem';}}
+const bgWords=document.querySelector('.bg-words');
+if(bgWords){
+  if(bgDirection==='vertical-down'){
+    bgWords.classList.add('vertical-down');
+    bgWords.querySelectorAll('.bg-row').forEach((row,index)=>{
+      if(index>=3){ row.style.display='none'; return; }
+      row.querySelectorAll('.bg-track').forEach((track,trackIndex)=>{
+        if(trackIndex===0){ track.textContent='TICKETDIVE TICKETDIVE TICKETDIVE'; }
+        else{ track.style.display='none'; }
+      });
+    });
+  }else if(bgDirection==='reverse'){
+    bgWords.style.transform='rotate(30deg)';
+    bgWords.style.transformOrigin='60rem 20rem';
+  }else{
+    bgWords.style.transform='rotate(-30deg)';
+    bgWords.style.transformOrigin='25rem 70rem';
+  }
+}
 
 const imgMain=document.getElementById('imageMain'), imgBlur=document.getElementById('imageBlur');
 function setEventImage(){
